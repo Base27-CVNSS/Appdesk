@@ -141,10 +141,16 @@ function download(name, body, mime) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 form.addEventListener("input", () => {
+  current = null;
+  $("result").hidden = true;
   preview();
   $("error").hidden = true;
 });
-form.addEventListener("change", preview);
+form.addEventListener("change", () => {
+  current = null;
+  $("result").hidden = true;
+  preview();
+});
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   try {
@@ -168,6 +174,8 @@ document.querySelectorAll(".examples button").forEach((button) =>
   button.addEventListener("click", () => {
     $("url").value = button.dataset.url;
     $("name").value = button.dataset.name;
+    current = null;
+    $("result").hidden = true;
     preview();
     $("url").focus();
   }),
