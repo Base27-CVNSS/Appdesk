@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#131b34">
+<meta name="description" content="Appdesk - Chuyển URL thành ứng dụng Desktop Windows, macOS và Linux bằng Pake + Tauri.">
+<title>Appdesk — URL thành ứng dụng Desktop</title>
+<link rel="stylesheet" href="./styles.css">
+<script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<div class="site">
+<header class="topbar">
+<a class="brand" href="./"><span class="brand-icon">▣</span> Appdesk<span class="accent">.</span></a>
+<nav><a href="#builder">Tạo ứng dụng</a><a href="#how">Hướng dẫn</a><a href="https://github.com/Base27-CVNSS/Appdesk" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+<span class="tag">● Mã nguồn mở</span>
+</header>
+<main>
+<section class="hero">
+<div class="kicker">✦ WEBSITE TO DESKTOP · NO CODE</div>
+<h1>Website của bạn.<br><em>Ứng dụng Desktop của bạn.</em></h1>
+<p>Chỉ cần nhập URL. Tuỳ chỉnh và chuẩn bị đóng gói website thành ứng dụng Windows, macOS hoặc Linux bằng Pake và Tauri.</p>
+<div class="chips"><span>▦ Windows · MSI</span><span>◉ macOS · DMG</span><span>⌘ Linux · DEB/AppImage</span></div>
+<div class="glow"></div>
+</section>
+<div id="builder" class="workbench">
+<section class="card editor">
+<div class="card-title"><div><span class="overline">TRÌNH TẠO ỨNG DỤNG</span><h2>Cấu hình Desktop</h2></div><b class="counter">01 / 02</b></div>
+<form id="form" novalidate>
+<h3><span>01</span> Thông tin website</h3>
+<div class="field"><label for="url">Địa chỉ website <i>*</i></label><input id="url" type="url" required maxlength="2000" placeholder="https://website-cua-ban.vn" spellcheck="false" autocomplete="url"><small>Dùng đường dẫn HTTP/HTTPS. Website vẫn cần kết nối mạng nếu nội dung nằm trên Internet.</small>
+<div class="examples"><span>Thử nhanh:</span><button type="button" data-url="https://vietflexmap.github.io/openmap/" data-name="Vietflex OpenMap">OpenMap</button><button type="button" data-url="https://base27-cvnss.github.io/VFM/" data-name="VFM Studio">VFM</button><button type="button" data-url="https://github.com/" data-name="GitHub">GitHub</button></div></div>
+<div class="two"><div class="field"><label for="name">Tên ứng dụng <i>*</i></label><input id="name" required maxlength="64" placeholder="Bản đồ Việt Nam"></div><div class="field"><label for="version">Phiên bản</label><input id="version" value="1.0.0" placeholder="1.0.0"></div></div>
+<div class="field"><label for="icon">URL biểu tượng <span class="muted">(tuỳ chọn)</span></label><input id="icon" type="url" placeholder="https://website.vn/logo.png" spellcheck="false"><small>Để trống để Pake tự lấy favicon từ website, nếu tìm thấy.</small></div>
+<h3 class="section"><span>02</span> Hệ điều hành</h3>
+<div class="platforms" role="radiogroup" aria-label="Hệ điều hành đích">
+<label><input type="radio" name="platform" value="windows-latest" checked><span class="platform"><b>▦</b><strong>Windows</strong><small>.msi</small></span></label>
+<label><input type="radio" name="platform" value="macos-latest"><span class="platform"><b>◉</b><strong>macOS</strong><small>.dmg</small></span></label>
+<label><input type="radio" name="platform" value="ubuntu-24.04"><span class="platform"><b>⌘</b><strong>Linux</strong><small>.deb / khác</small></span></label>
+</div>
+<div id="linuxRow" class="field extra" hidden><label for="targets">Định dạng gói Linux</label><select id="targets"><option value="deb">DEB (Ubuntu / Debian)</option><option value="appimage">AppImage (nhiều bản phân phối)</option><option value="rpm">RPM</option><option value="zst">ZST (Arch Linux)</option><option value="deb,appimage">DEB + AppImage</option></select></div>
+<h3 class="section"><span>03</span> Tuỳ chỉnh cửa sổ</h3>
+<div class="two"><div class="field"><label for="width">Chiều rộng (px)</label><input id="width" type="number" min="640" max="3840" value="1200"></div><div class="field"><label for="height">Chiều cao (px)</label><input id="height" type="number" min="480" max="2160" value="780"></div></div>
+<div class="switches">
+<label><span><strong>Cho phép mở cửa sổ mới</strong><small>Hữu ích với đăng nhập hoặc popup</small></span><input type="checkbox" id="newWindow"></label>
+<label><span><strong>Khởi động toàn màn hình</strong><small>Ứng dụng mở ở chế độ fullscreen</small></span><input type="checkbox" id="fullscreen"></label>
+<label id="macTitleRow" hidden><span><strong>Ẩn thanh tiêu đề macOS</strong><small>Giao diện tối giản</small></span><input type="checkbox" id="hideTitle"></label>
+<label id="multiArchRow" hidden><span><strong>Universal macOS</strong><small>Intel + Apple Silicon</small></span><input type="checkbox" id="multiArch"></label>
+</div>
+<p id="error" class="error" role="alert" hidden></p>
+<button type="submit" class="primary full">✦ Tạo cấu hình Desktop <span>→</span></button>
+<p class="fineprint">Trang không yêu cầu GitHub token. Việc biên dịch được thực hiện qua GitHub Actions hoặc Pake CLI.</p>
+</form>
+</section>
+<aside>
+<section class="card preview">
+<div class="card-title"><div><span class="overline">XEM TRƯỚC</span><h2>Ứng dụng của bạn</h2></div><b class="ready">● Mô phỏng</b></div>
+<div class="desktop-bg"><div class="fake-window"><div class="fake-bar"><span class="lights"><i></i><i></i><i></i></span><span id="windowTitle">Tên ứng dụng</span><span>− □ ×</span></div><div class="fake-body"><div class="preview-logo">▣</div><strong id="previewName">Ứng dụng của bạn</strong><small id="previewHost">website-cua-ban.vn</small><div class="loader"></div></div><div class="fake-bottom"><span>● Sẵn sàng cấu hình</span><span id="previewSize">1200 × 780</span></div></div></div>
+<div class="stats"><div><small>Hệ điều hành</small><strong id="previewPlatform">Windows</strong></div><div><small>Định dạng</small><strong id="previewFormat">MSI</strong></div><div><small>Công nghệ</small><strong>Tauri + Rust</strong></div></div>
+<p class="fineprint">Ảnh mô phỏng, không nhúng website. Cửa sổ thực tế phụ thuộc vào nội dung và chính sách của website nguồn.</p>
+</section>
+<div class="info"><b>ⓘ</b><p><strong>Đây là ứng dụng WebView.</strong> Công cụ đóng gói URL, không sao chép website thành ứng dụng offline. Quy định đăng nhập và quyền truy cập vẫn được áp dụng.</p></div>
+<p class="powered">POWERED BY <strong>Pake</strong> · <strong>Tauri</strong> · <strong>Rust</strong></p>
+</aside>
+</div>
+<section id="result" class="results" tabindex="-1" hidden>
+<span class="overline">BƯỚC 02 / 02</span><h2>Đã chuẩn bị cấu hình đóng gói</h2><p>Chọn phương thức bên dưới để thực sự biên dịch và nhận bộ cài.</p>
+<div class="result-grid">
+<article class="card result-card"><div class="result-header"><span>☁</span><div><h3>GitHub Actions</h3><small>Không cần cài Rust trên máy</small></div></div><p>Mở workflow <strong>Build App With Pake CLI</strong>, bấm <strong>Run workflow</strong>, điền thông số và tải bộ cài từ <strong>Artifacts</strong> sau khi build thành công.</p><div id="actionInputs" class="inputs"></div><div class="actions"><a class="primary" target="_blank" rel="noopener noreferrer" href="https://github.com/Base27-CVNSS/Appdesk/actions/workflows/pake-cli.yaml">Mở GitHub Actions ↗</a><button type="button" id="copyInputs">Sao chép thông số</button></div><details><summary>Chạy workflow bằng GitHub CLI</summary><pre id="ghCommand"></pre><button type="button" id="copyGh">Sao chép lệnh gh</button><small>Cần GitHub CLI đã đăng nhập và quyền Actions trong repository.</small></details></article>
+<article class="card result-card"><div class="result-header"><span class="purple">⌘</span><div><h3>Đóng gói trên máy</h3><small>Pake CLI · Node.js + Rust</small></div></div><p>Dùng terminal trên hệ điều hành đích. Cần có Node.js ≥20.9, Rust và các thư viện hệ thống cần thiết cho Tauri.</p><pre id="cliCommand"></pre><div class="actions"><button type="button" id="copyCli">Sao chép lệnh</button><button type="button" id="downloadScript">Tải tập lệnh</button><button type="button" id="downloadJson">Tải JSON</button></div><p class="fineprint">JSON chứa tham số workflow, không phải config Pake CLI. Tập lệnh chỉ chạy build; không tự cài công cụ phát triển.</p></article>
+</div>
+</section>
+<section id="how" class="how"><span class="overline">CÁCH HOẠT ĐỘNG</span><h2>Chỉ ba bước để bắt đầu</h2><div class="how-grid"><article><b>01</b><h3>Nhập URL</h3><p>Thêm website, đặt tên và chọn hệ điều hành.</p></article><article><b>02</b><h3>Tạo cấu hình</h3><p>Appdesk chuẩn bị lệnh và thông số cho Pake.</p></article><article><b>03</b><h3>Nhận bộ cài</h3><p>Biên dịch bằng GitHub Actions hoặc tại máy rồi tải ứng dụng.</p></article></div></section>
+</main>
+<footer><strong>Appdesk<span class="accent">.</span></strong><span>Website → Desktop · Base27-CVNSS</span><a href="https://github.com/Base27-CVNSS/Appdesk">Mã nguồn GitHub ↗</a></footer>
+</div><div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
