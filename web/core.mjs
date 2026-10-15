@@ -13,8 +13,8 @@ export function parseSettings(raw) {
     throw Error("Chỉ hỗ trợ HTTP/HTTPS, không có tên đăng nhập hoặc mật khẩu trong URL.");
   }
   const name = trim(raw.name);
-  if (!/^[\p{L}\p{N}][\p{L}\p{N} ._-]{0,63}$/u.test(name)) {
-    throw Error("Tên ứng dụng dài 1–64 ký tự, chỉ dùng chữ, số, dấu cách, dấu chấm và gạch ngang/dưới.");
+  if (!/^[\p{L}\p{N}][\p{L}\p{N} .'_-]{0,63}$/u.test(name)) {
+    throw Error("Tên ứng dụng dài 1–64 ký tự, chỉ dùng chữ, số, dấu cách, dấu chấm, dấu nháy đơn và gạch ngang/dưới.");
   }
   const version = trim(raw.version) || "1.0.0";
   if (!/^\d+\.\d+\.\d+$/.test(version)) throw Error("Phiên bản phải có dạng 1.0.0.");
