@@ -1,3 +1,17 @@
+# Appdesk — Chuyển URL thành ứng dụng Desktop
+
+**Giao diện tiếng Việt**: nhập URL, đặt tên, lựa chọn Windows/macOS/Linux và nhận lệnh đóng gói qua Pake + Tauri.
+
+- [Mở mã nguồn trang Appdesk](web/index.html)
+- [Hướng dẫn sử dụng tiếng Việt](docs/Appdesk-VI.md)
+- [Build ứng dụng bằng GitHub Actions](https://github.com/Base27-CVNSS/Appdesk/actions/workflows/pake-cli.yaml)
+- [GitHub Pages — cần bật Pages trong Settings nếu chưa được kích hoạt](https://base27-cvnss.github.io/Appdesk/)
+
+> Giao diện tạo cấu hình, không tự sinh file .msi/.dmg trong trình duyệt. Sử dụng Pake CLI hoặc workflow Actions có sẵn để biên dịch.
+
+---
+
+## Pake — Nền tảng đóng gói
 <div align="center">
   <img src="https://raw.githubusercontent.com/tw93/Pake/main/assets/logo.png" width="138" />
   <h1>Pake</h1>
